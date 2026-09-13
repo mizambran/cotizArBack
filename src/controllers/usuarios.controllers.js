@@ -31,6 +31,6 @@ export const listarUsuarios = async (req, res) => {
     res.status(200).json(usuarios);
   } catch (error) {
     console.error(error)
-    res.status(500).json({mensaje:"No se pudo listar los usuarios."})
+    res.status(500).json({mensaje:"No se pudo listar los usuarios..."})
   }
 };
