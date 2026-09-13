@@ -1,10 +1,11 @@
 import { Router } from "express";
 import usuarioValidacion from '../middlewares/usuarioValidacion.js'
-import { crearUsuario } from "../controllers/usuarios.controllers.js";
+import { crearUsuario, listarUsuarios } from "../controllers/usuarios.controllers.js";
 
 
 const router = Router()
 
-router.route('/').post(usuarioValidacion, crearUsuario)
+
+router.route('/').get(listarUsuarios).post(usuarioValidacion, crearUsuario)
 
 export default router
