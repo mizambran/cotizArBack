@@ -11,7 +11,17 @@ export default class Server {
         this.middlewares()
     }
     middlewares(){
-        this.app.use(cors())
+        const urlFront = process.env.URL_FRONT
+        const corsOptions = {
+            origin: [
+                `${urlFront}`, // Tu frontend en producción
+                'http://localhost:5173'         // Tu frontend en desarrollo (ajustá el puerto si usás otro)
+            ],
+            credentials: true, // Fundamental para enviar y recibir tokens JWT o cookies
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        };
+        this.app.use(cors(corsOptions))
         this.app.use(express.json())
         this.app.use(morgan("dev"))
         const __dirname = dirname(fileURLToPath(import.meta.url))
