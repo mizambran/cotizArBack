@@ -42,8 +42,8 @@ export const filtrarPorMarca = async(req, res) => {
         if(!isValidObjectId(id)){
             return res.status(400).json({mensaje:"El id que buscas es inválido"})
         }
-        const modelosEncontrados = await Modelo.find({marca_id:id})
-        if(!modelosEncontrados){
+        const modelosEncontrados = await Modelo.find({marca_id:id}).lean()
+        if(!modelosEncontrados || modelosEncontrados.length === 0){
             return res.status(404).json({mensaje:"No se encontraron los modelos que buscas"})
         }
         res.status(200).json(modelosEncontrados)
