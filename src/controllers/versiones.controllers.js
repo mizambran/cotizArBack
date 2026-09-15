@@ -41,8 +41,8 @@ export const buscarVersionPorModelo = async(req, res) => {
         if(!isValidObjectId(id)){
             return res.status(400).json({mensaje:"El id del modelo es inválido"})
         }
-        const versionesEncontradas = await Version.find({modelo_id:id})
-        if(!versionesEncontradas){
+        const versionesEncontradas = await Version.find({modelo_id:id}).lean()
+        if(!versionesEncontradas || versionesEncontradas.length === 0){
             return res.status(404).json({mensaje:"No se encontró la versión que estas buscando"})
         }
         res.status(200).json(versionesEncontradas)

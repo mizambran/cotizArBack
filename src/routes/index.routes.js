@@ -5,6 +5,7 @@ import modelosRoutes from './modelos.routes.js'
 import versionesRoutes from './versiones.routes.js'
 import valuacionesRoutes from './valuaciones.routes.js'
 import sincronizarRoutes from './sincronizar.routes.js'
+import tablaModVersRouter from './tablaModVers.routes.js'
 
 const router = Router()
 
@@ -14,5 +15,6 @@ router.use('/modelos', modelosRoutes)
 router.use('/versiones', versionesRoutes)
 router.use('/valuaciones', valuacionesRoutes)
 router.use('/sync', sincronizarRoutes)
+router.use('/tabla', tablaModVersRouter)
 
 export default router
