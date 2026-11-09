@@ -1,44 +1,77 @@
-import router from './src/routes/index.routes.js'
-import Server from './src/server/config.js'
-import './src/server/dbConfig.js'
-import { 
-   sincronizarModelos,
-   sincronizarVersiones,
-   sincronizarValuaciones
-   
-} from './src/services/motos.services.js';
+import router from "./src/routes/index.routes.js";
+import Server from "./src/server/config.js";
+import "./src/server/dbConfig.js";
+import {
+  
+  sincronizarModelosAutos,
+  sincronizarValuacionesAutos,
+  sincronizarVersionesAutos,
+} from "./src/services/autos.services.js";
+import {
+  sincronizarModelos,  
+  sincronizarVersiones,
+  sincronizarValuaciones,
+} from "./src/services/motos.services.js";
 
+const server = new Server();
 
+server.app.use("/api", router);
 
-const server = new Server()
-
-server.app.use('/api', router)
-
-if(process.env.NODE_ENV !== 'production'){
-  server.listen()
+if (process.env.NODE_ENV !== "production") {
+  server.listen();
 }
 
-const ejecutarSincronizacionMasiva = async () => {
+// MOTOS
+/* const ejecutarSincronizacionMasiva = async () => {
   try {
     console.log("=== INICIANDO ACTUALIZACIÓN MOTOS ===");
-    console.log("Nota: Este proceso durará varias horas por el límite de la API.");
+    console.log(
+      "Nota: Este proceso durará varias horas por el límite de la API.",
+    );
 
     console.log("\n--- PASO 1: Sincronizando Modelos ---");
-    await sincronizarModelos();
+    //await sincronizarModelos();
 
     console.log("\n--- PASO 2: Sincronizando Versiones ---");
-    await sincronizarVersiones();
+    //await sincronizarVersiones();
 
     console.log("\n--- PASO 3: Sincronizando Valuaciones (Precios) ---");
-    await sincronizarValuaciones();
+    //await sincronizarValuaciones();
+
+    console.log("\n=== ¡BASE DE DATOS COTIZAR COMPLETAMENTE ACTUALIZADA! ===");
+  } catch (error) {
+    console.error("El script masivo se detuvo por un error:", error);
+  }
+}; */
+
+/* ejecutarSincronizacionMasiva();
+
+// AUTOS
+const ejecutarSincronizacionMasivaAutos = async () => {
+  console.log("=== INICIANDO ACTUALIZACIÓN MOTOS ===");
+  console.log(
+    "Nota: Este proceso durará varias horas por el límite de la API.",
+  );
+
+  try {
+    console.log("Yendo a buscar marcas");
+    //await sincronizarMarcasAutos();
+
+    console.log("Buscando modelos...");
+    //await sincronizarModelosAutos();
+
+    console.log("Buscando versiones...");
+    //await sincronizarVersionesAutos();
+
+    console.log("Buscando valuaciones");
+    await sincronizarValuacionesAutos();
 
     console.log("\n=== ¡BASE DE DATOS COTIZAR COMPLETAMENTE ACTUALIZADA! ===");
   } catch (error) {
     console.error("El script masivo se detuvo por un error:", error);
   }
 };
+ejecutarSincronizacionMasivaAutos() */
 
 
-//ejecutarSincronizacionMasiva();
-
-export default server.app
+export default server.app;
