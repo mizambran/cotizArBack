@@ -70,6 +70,16 @@ export const sincronizarModelosAutos = async () => {
   const urlBase = process.env.BASE_URL_API_AUTOS; 
 
   for (const marca of marcasDb) {
+    // VERIFICACIÓN DE REANUDACIÓN
+    // Contamos si ya descargamos todos los modelos de esta marca
+    const modelosEnMongo = await ModeloAuto.countDocuments({ marca_id: marca._id });
+    
+    // Si la cantidad de modelos en BD es igual o mayor a los que indica la marca, omitimos
+    if (modelosEnMongo >= marca.cantModelos) {
+      console.log(`⏩ Omitiendo marca ${marca.nombre}: Sus ${marca.cantModelos} modelos ya están en la BD.`);
+      continue; 
+    }
+
     let paginaActual = 1;
     let limit = 100;
     let hayMasPaginas = true;

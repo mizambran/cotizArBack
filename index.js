@@ -2,13 +2,13 @@ import router from "./src/routes/index.routes.js";
 import Server from "./src/server/config.js";
 import "./src/server/dbConfig.js";
 import {
-  sincronizarMarcasAutos,
+  
   sincronizarModelosAutos,
   sincronizarValuacionesAutos,
   sincronizarVersionesAutos,
 } from "./src/services/autos.services.js";
 import {
-  sincronizarModelos,
+  sincronizarModelos,  
   sincronizarVersiones,
   sincronizarValuaciones,
 } from "./src/services/motos.services.js";
@@ -30,13 +30,13 @@ const ejecutarSincronizacionMasiva = async () => {
     );
 
     console.log("\n--- PASO 1: Sincronizando Modelos ---");
-    await sincronizarModelos();
+    //await sincronizarModelos();
 
     console.log("\n--- PASO 2: Sincronizando Versiones ---");
-    await sincronizarVersiones();
+    //await sincronizarVersiones();
 
     console.log("\n--- PASO 3: Sincronizando Valuaciones (Precios) ---");
-    await sincronizarValuaciones();
+    //await sincronizarValuaciones();
 
     console.log("\n=== ¡BASE DE DATOS COTIZAR COMPLETAMENTE ACTUALIZADA! ===");
   } catch (error) {
@@ -44,7 +44,7 @@ const ejecutarSincronizacionMasiva = async () => {
   }
 };
 
-//ejecutarSincronizacionMasiva();
+ejecutarSincronizacionMasiva();
 
 // AUTOS
 const ejecutarSincronizacionMasivaAutos = async () => {
@@ -55,13 +55,13 @@ const ejecutarSincronizacionMasivaAutos = async () => {
 
   try {
     console.log("Yendo a buscar marcas");
-    await sincronizarMarcasAutos();
+    //await sincronizarMarcasAutos();
 
     console.log("Buscando modelos...");
-    await sincronizarModelosAutos();
+    //await sincronizarModelosAutos();
 
     console.log("Buscando versiones...");
-    await sincronizarVersionesAutos();
+    //await sincronizarVersionesAutos();
 
     console.log("Buscando valuaciones");
     await sincronizarValuacionesAutos();
@@ -72,7 +72,6 @@ const ejecutarSincronizacionMasivaAutos = async () => {
   }
 };
 ejecutarSincronizacionMasivaAutos()
-
 
 
 export default server.app;
