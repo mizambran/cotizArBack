@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // MOTOS
-const ejecutarSincronizacionMasiva = async () => {
+/* const ejecutarSincronizacionMasiva = async () => {
   try {
     console.log("=== INICIANDO ACTUALIZACIÓN MOTOS ===");
     console.log(
@@ -42,9 +42,9 @@ const ejecutarSincronizacionMasiva = async () => {
   } catch (error) {
     console.error("El script masivo se detuvo por un error:", error);
   }
-};
+}; */
 
-ejecutarSincronizacionMasiva();
+/* ejecutarSincronizacionMasiva();
 
 // AUTOS
 const ejecutarSincronizacionMasivaAutos = async () => {
@@ -71,7 +71,7 @@ const ejecutarSincronizacionMasivaAutos = async () => {
     console.error("El script masivo se detuvo por un error:", error);
   }
 };
-ejecutarSincronizacionMasivaAutos()
+ejecutarSincronizacionMasivaAutos() */
 
 
 export default server.app;
