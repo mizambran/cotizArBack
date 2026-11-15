@@ -9,6 +9,10 @@ import tablaModVersRouter from './tablaModVers.routes.js'
 import tablaModVersAutoRouter from './tablaModVersAuto.route.js'
 import marcasAutoRoutes from './marcasAuto.routes.js'
 import modelosAutoRoutes from './modelosAuto.route.js'
+import valuacionesAutoRoutes from './valuacionesAuto.route.js'
+import presupuestoAutoRoutes from './presupuestoAuto.routes.js'
+
+
 
 const router = Router()
 
@@ -22,5 +26,7 @@ router.use('/tabla', tablaModVersRouter)
 router.use('/autos/tabla', tablaModVersAutoRouter)
 router.use('/autos/marcas', marcasAutoRoutes)    
 router.use('/autos/modelos', modelosAutoRoutes)    
+router.use('/autos/valuaciones', valuacionesAutoRoutes)
+router.use('/autos/presupuesto', presupuestoAutoRoutes)
 
 export default router
