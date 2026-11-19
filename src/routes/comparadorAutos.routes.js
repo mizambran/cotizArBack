@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { compararVehiculosAuto } from "../controllers/comparadorAutos.controllers.js";
+import  {compararVehiculosAuto} from "../controllers/comparadorAutos.controllers.js";
 
 
 
