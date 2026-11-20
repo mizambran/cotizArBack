@@ -46,6 +46,7 @@ if (process.env.NODE_ENV !== "production") {
 
 /* ejecutarSincronizacionMasiva();
 
+*/
 // AUTOS
 const ejecutarSincronizacionMasivaAutos = async () => {
   console.log("=== INICIANDO ACTUALIZACIÓN MOTOS ===");
@@ -71,7 +72,7 @@ const ejecutarSincronizacionMasivaAutos = async () => {
     console.error("El script masivo se detuvo por un error:", error);
   }
 };
-ejecutarSincronizacionMasivaAutos() */
+//ejecutarSincronizacionMasivaAutos() 
 
 
 export default server.app;
