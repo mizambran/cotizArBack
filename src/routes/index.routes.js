@@ -13,6 +13,8 @@ import valuacionesAutoRoutes from './valuacionesAuto.route.js'
 import presupuestoAutoRoutes from './presupuestoAuto.routes.js'
 import compararAutoRoutes from './comparadorAutos.routes.js'
 import comparadorMotosRouter from './comparadorMotos.routes.js'
+import presupuestoMotoRouter from './presupuestoMoto.routes.js'
+
 
 const router = Router()
 
@@ -24,6 +26,7 @@ router.use('/valuaciones', valuacionesRoutes)
 router.use('/sync', sincronizarRoutes)
 router.use('/tabla', tablaModVersRouter)
 router.use('/comparador', comparadorMotosRouter)
+router.use('/presupuesto', presupuestoMotoRouter)
 router.use('/autos/tabla', tablaModVersAutoRouter)
 router.use('/autos/marcas', marcasAutoRoutes)    
 router.use('/autos/modelos', modelosAutoRoutes)    
