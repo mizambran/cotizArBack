@@ -5,7 +5,7 @@ const favoritoEsquema = new Schema(
     usuario_id: {
       type: Schema.Types.ObjectId,
       ref: "usuario",
-      required: true,
+      required: false, // Lo dejamos opcional por si hacés pruebas sin token al principio, luego lo podés pasar a true
     },
     categoria: {
       type: String,
@@ -20,20 +20,24 @@ const favoritoEsquema = new Schema(
     titulo: {
       type: String,
       required: true,
-      trim: true, // Ej: "Comparativa: Onix vs Cronos vs Argo" o "Presupuesto hasta $10.000.000"
+      trim: true, // Ej: "Chevrolet Onix LTZ", "Presupuesto hasta $10.000.000", "Onix vs Cronos"
     },
-    // Para 'cotizacion' (1 ID) o 'comparativa' (hasta 4 IDs)
+    subtitulo: {
+      type: String,
+      trim: true, // Ej: "Año 2023 - $12.500.000" o "3 vehículos comparados"
+    },
+    // Se usa cuando tipo === "cotizacion" (1 ID) o tipo === "comparativa" (hasta 4 IDs)
     versiones_ids: [
       {
         type: Schema.Types.ObjectId,
       },
     ],
-    // Para 'presupuesto' (guardamos los parámetros con los que buscó)
+    // Se usa cuando tipo === "presupuesto"
     filtro_presupuesto: {
-      montoMaximo: Number,
-      marca: String,
-      modelo: String,
-      version: String,
+      presupuesto: { type: String, default: "" },
+      marca: { type: String, default: "" },
+      modelo: { type: String, default: "" },
+      version: { type: String, default: "" },
     },
   },
   { timestamps: true }
