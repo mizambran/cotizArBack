@@ -14,6 +14,8 @@ import presupuestoAutoRoutes from './presupuestoAuto.routes.js'
 import compararAutoRoutes from './comparadorAutos.routes.js'
 import comparadorMotosRouter from './comparadorMotos.routes.js'
 import presupuestoMotoRouter from './presupuestoMoto.routes.js'
+import favoritosRoutes from './favoritos.routes.js'
+
 
 
 const router = Router()
@@ -33,5 +35,7 @@ router.use('/autos/modelos', modelosAutoRoutes)
 router.use('/autos/valuaciones', valuacionesAutoRoutes)
 router.use('/autos/presupuesto', presupuestoAutoRoutes)
 router.use('/autos/comparador', compararAutoRoutes)
+router.use('/favoritos', favoritosRoutes)
+
 
 export default router
