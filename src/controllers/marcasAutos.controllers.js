@@ -11,27 +11,65 @@ import MarcaAuto from "../models/marcaAuto.model.js"
     }
 } */
 
+export const listarMarcasAutoPaginado = async (req, res) => {
+  try {
+    const { page = 1, limit = 20, search = "" } = req.query;
 
-export const marcasAutoPaginado = async(req, res) => {
-    try {
-        if(req.query.limit > 100){
-            return res.status(400).json({mensaje:"Baja un poco el limit"})
-        }
-        let page = req.query.page || 1
-        let limit = req.query.limit || 10
-        const skip = (page - 1) * limit
-        const [marcas, cantMarcas] = await Promise.all([
-            MarcaAuto.find().skip(skip).limit(limit), MarcaAuto.countDocuments()
-        ])
-        res.status(200).json({
-            results: marcas,
-            paginaActual: page,
-            TotalPaginas: Math.ceil(cantMarcas / limit),
-            cantidadMarcas:cantMarcas
-        })
+    const paginaActual = Math.max(1, parseInt(page));
+    const limitePorPagina = parseInt(limit);
+    const salto = (paginaActual - 1) * limitePorPagina;
 
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({mensaje:"Ocurrió algo al intentar paginar las marcas"})
+    const pipeline = [];
+
+    // 1. Si hay texto de búsqueda, filtramos primero
+    if (search.trim() !== "") {
+      pipeline.push({
+        $match: {
+          nombre: { $regex: search.trim(), $options: "i" },
+        },
+      });
     }
-}
+
+    // 2. Unimos con modeloautos para contar cuántos modelos tiene cada marca
+    pipeline.push(
+      {
+        $lookup: {
+          from: "modeloautos",
+          localField: "_id",
+          foreignField: "marca_id",
+          as: "modelosAsociados",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          nombre: 1,
+          cantidadModelos: { $size: "$modelosAsociados" },
+        },
+      },
+      { $sort: { nombre: 1 } },
+      {
+        $facet: {
+          resultados: [{ $skip: salto }, { $limit: limitePorPagina }],
+          totalDocumentos: [{ $count: "total" }],
+        },
+      }
+    );
+
+    const [respuesta] = await MarcaAuto.aggregate(pipeline);
+
+    const resultados = respuesta?.resultados || [];
+    const total = respuesta?.totalDocumentos[0]?.total || 0;
+    const totalPaginas = Math.ceil(total / limitePorPagina);
+
+    res.status(200).json({
+      results: resultados,
+      paginaActual,
+      totalPaginas,
+      totalRegistros: total,
+    });
+  } catch (error) {
+    console.error("Error en listarMarcasAutoPaginado:", error);
+    res.status(500).json({ mensaje: "Error al listar las marcas de autos" });
+  }
+};
