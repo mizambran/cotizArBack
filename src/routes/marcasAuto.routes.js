@@ -1,11 +1,11 @@
 import { Router } from "express";
-import {  marcasAutoPaginado } from "../controllers/marcasAutos.controllers.js";
+import {  listarMarcasAutoPaginado } from "../controllers/marcasAutos.controllers.js";
 
 
 
 const router = Router()
 
-router.route('/paginacion').get(marcasAutoPaginado)
+router.route('/paginacion').get(listarMarcasAutoPaginado)
 
 export default router
 
