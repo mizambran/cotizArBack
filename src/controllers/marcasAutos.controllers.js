@@ -11,9 +11,6 @@ import MarcaAuto from "../models/marcaAuto.model.js"
     }
 } */
 
-
-import MarcaAuto from "../models/marcaAuto.model.js"; // Ajustá el nombre de tu modelo si varía
-
 export const listarMarcasAutoPaginado = async (req, res) => {
   try {
     const { page = 1, limit = 20, search = "" } = req.query;
